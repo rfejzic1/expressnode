@@ -18,10 +18,17 @@ app.use(express.static(__dirname + '/public'));
 const PORT = 3000;
 app.set('port', process.env.PORT || PORT);
 
+// 
+app.use((req, res, next) => {
+    if(!res.locals.partials)
+        res.locals.partials = {};
+    res.locals.partials.serverHi = greetings.getRandomGreeting();
+    next();
+});
+
 // Routes
 app.get('/', (req, res) => {
-    const serverHi = greetings.getRandomGreeting();
-    res.render('home', { serverHi });
+    res.render('home');
 });
 
 app.get('/about', (req, res) => {
@@ -30,6 +37,16 @@ app.get('/about', (req, res) => {
 
 app.get('/redirectme', (req, res) => {
     res.redirect('/about');
+});
+
+app.get('/text', (req, res) => {
+    res.set('Content-Type', 'text/plain');
+    // or res.set('text/plain);
+    res.send('This is just plain text.');
+});
+
+app.get('/download', (req, res) => {
+    res.download('./public/favicon.ico');
 });
 
 // Custom 404 page

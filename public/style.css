@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+:root {
+  --dark: #333;
+  --light: #eee;
+}
+
+html, body {
+  padding: 0px;
+  margin: 0px;
+  color: var(--dark);
+  box-sizing: content-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lato', sans-serif;
+}
+
+.container {
+  max-width: 920px;
+  width: 100%;
+  margin: auto;
+  padding: 20px;
+}
