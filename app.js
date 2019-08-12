@@ -1,4 +1,5 @@
 const express = require('express');
+const greetings = require('./lib/greetings');
 
 const app = express();
 
@@ -7,11 +8,15 @@ var handlebars = require('express-handlebars').create({ defaultLayout:'main' });
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
+app.use(express.static(__dirname + '/public'));
+
 const PORT = 3000;
 app.set('port', process.env.PORT || PORT);
 
+
 app.get('/', function(req, res){
-    res.render('home');
+    const serverHi = greetings.getRandomGreeting();
+    res.render('home', { serverHi });
 });
 
 app.get('/about', function(req, res){
