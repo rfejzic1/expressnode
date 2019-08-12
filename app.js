@@ -1,4 +1,6 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+
 const greetings = require('./lib/greetings');
 
 const app = express();
@@ -13,6 +15,10 @@ app.set('view engine', 'handlebars');
 
 // Static folder
 app.use(express.static(__dirname + '/public'));
+
+// Use body-parser
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 // Port number
 const PORT = 3000;
@@ -35,6 +41,19 @@ app.get('/about', (req, res) => {
     res.render('about');
 });
 
+app.get('/forms', (req, res) => {
+    res.render('forms');
+});
+
+// Not the best solution?
+app.post('/colors', (req, res) => {
+    res.render('colors', {
+        name: req.body.name,
+        color: req.body.color
+    });
+});
+
+// More routes
 app.get('/redirectme', (req, res) => {
     res.redirect('/about');
 });
