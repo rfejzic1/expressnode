@@ -53,6 +53,19 @@ app.post('/colors', (req, res) => {
     });
 });
 
+// Fail route
+app.get('/fail', (req, res) => {
+    throw new Error('Failed!');
+});
+
+
+// This route causes the server to fail :)
+app.get('/epic-fail', function(req, res){
+    process.nextTick(() => {
+        throw new Error('Kaboom!');
+    });
+});
+
 // More routes
 app.get('/redirectme', (req, res) => {
     res.redirect('/about');
@@ -83,5 +96,5 @@ app.use((err, req, res, next) => {
 
 // Server start
 app.listen(app.get('port'), () => {
-    console.log(`Running server on port ${app.get('port')}...`);
+    console.log(`Running ${app.get('env')} server on port ${app.get('port')}...`);
 });
