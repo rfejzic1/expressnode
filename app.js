@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 const PORT = 3000;
 app.set('port', process.env.PORT || PORT);
 
-// 
+// Partials context setup
 app.use((req, res, next) => {
     if(!res.locals.partials)
         res.locals.partials = {};
@@ -45,7 +45,7 @@ app.get('/forms', (req, res) => {
     res.render('forms');
 });
 
-// Not the best solution?
+// Not the best solution? (back button can go to form result?)
 app.post('/colors', (req, res) => {
     res.render('colors', {
         name: req.body.name,

@@ -1,0 +1,1 @@
+exports.cookieSecret = 'this is a super sweet cookie secret';
