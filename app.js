@@ -20,6 +20,10 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+// Use cookie-parser and express-session
+app.use(require('cookie-parser')(credentials.cookieSecret));
+app.use(require('express-session')());
+
 // Port number
 const PORT = 3000;
 app.set('port', process.env.PORT || PORT);
